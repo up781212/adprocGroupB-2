@@ -10,6 +10,7 @@ public abstract class Pipe {
     private int grade; //Grade 1-5
     private boolean chemicalResistance; //Available for all 
     private double costPerInch; //In pounds
+    private double costTotal; //The total cost of the pipe
     
     /*
     ALL INPUT UNITS IN INCHES FOR SIMPLICITY. 
@@ -22,12 +23,14 @@ public abstract class Pipe {
     private double innerDiameter; 
     
   
-    public Pipe(int grade, boolean chemicalResistance, double length, double outerDiameter){
+    public Pipe(int grade, boolean chemicalResistance, double length, double outerDiameter, double costPerInch){
         this.grade = grade;
         this.chemicalResistance = chemicalResistance;
         this.length = length;
         this.outerDiameter = outerDiameter;
+        this.costPerInch = costPerInch;
         innerDiameter = outerDiameter * 0.9;
+        calculateCost();
     }
     
     
@@ -47,5 +50,51 @@ public abstract class Pipe {
     public double getCostPerInch(){
         return costPerInch;
     }
+    public double getCostTotal(){
+        calculateCost();
+        return costTotal;
+    }
     
+    public double getLength(){
+        return length;
+    }
+    
+    public double getOuterDiameter(){
+        return outerDiameter;
+    }
+    
+    public double getInnerDiameter(){
+        return innerDiameter;
+    }
+    
+    
+    /*
+    METHODS
+    */
+    
+    //Work out area of pipe
+    private double pipeArea(){
+        return cylinderArea(outerDiameter) - cylinderArea(innerDiameter);
+    }
+            
+    //Work out area of cylinder
+    private double cylinderArea(double d){
+        return Math.PI * (d/2) * length ;
+    }
+    
+    //Work out your cost 
+    private double calculateBaseCost(){
+        double cost = pipeArea() * costPerInch;
+        if(chemicalResistance) cost *= 1.14;
+        return cost;
+    }
+    
+    /*Other additionalCosts can be calculated here. 
+    The base cost is universal. 
+    Less checks having to be done overall this way.
+    */
+    private void calculateCost(){
+        costTotal = calculateBaseCost();
+    }
+
 }
