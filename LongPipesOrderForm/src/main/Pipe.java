@@ -1,5 +1,8 @@
 package main;
 
+//UPDATE SUBCLASSES TO BE MORE STRUCTURED INSTEAD OF ALL COMING OFF OF THIS DIRECTLY
+
+
 /* 
 Ah, a glorious Pipe! 
 Or, Picasso's implementation of one... Make sure not to reference this class
@@ -10,7 +13,7 @@ public abstract class Pipe {
     private int grade; //Grade 1-5
     private boolean chemicalResistance; //Available for all 
     private double costPerInch; //In pounds
-    private double costTotal; //The total cost of the pipe
+    protected double costTotal; //The total cost of the pipe
     
     /*
     ALL INPUT UNITS IN INCHES FOR SIMPLICITY. 
@@ -33,8 +36,7 @@ public abstract class Pipe {
         calculateCost();
     }
     
-    
-    
+       
     
     public int getGrade(){
         return grade;
@@ -67,11 +69,9 @@ public abstract class Pipe {
         return innerDiameter;
     }
     
-    
     /*
     METHODS
-    */
-    
+    */  
     //Work out area of pipe
     private double pipeArea(){
         return cylinderArea(outerDiameter) - cylinderArea(innerDiameter);
@@ -83,9 +83,8 @@ public abstract class Pipe {
     }
     
     //Work out your cost 
-    private double calculateBaseCost(){
+    protected double calculateBaseCost(){
         double cost = pipeArea() * costPerInch;
-        if(chemicalResistance) cost *= 1.14;
         return cost;
     }
     
@@ -93,8 +92,9 @@ public abstract class Pipe {
     The base cost is universal. 
     Less checks having to be done overall this way.
     */
-    private void calculateCost(){
+    protected void calculateCost(){
         costTotal = calculateBaseCost();
+        if(chemicalResistance) costTotal *= 1.14;
     }
 
 }
