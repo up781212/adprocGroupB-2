@@ -13,6 +13,7 @@ public class PipeFactory {
     //checks the pipe type from criteria and uses to create a valid pipe.
     public Pipe PipeCheck(int grade, boolean chemicalResistance, double length, double outerDiameter){
         
+        
         //placeholder code
         PipeT2 pip = new PipeT2(grade, chemicalResistance, length, outerDiameter);
         return pip;

@@ -10,12 +10,12 @@ public abstract class Pipe {
 
     private int grade; //Grade 1-5
     private boolean chemicalResistance; //Available for all 
-    protected double [] costPerInch; //Used to display available grades and their equivilence 
+    protected double[] costPerInch; //Used to display available grades and their equivilence 
     protected double costTotal; //The total cost of the pipe
 
     /*
     ALL INPUT UNITS IN INCHES FOR SIMPLICITY. 
-    MAKE SURE CONVERSION HAS BEEN DONE IN BOXFACTORY!
+    MAKE SURE CONVERSION IS DONE ON INPUT
      */
     //All stored in inches
     private double length;
@@ -80,8 +80,9 @@ public abstract class Pipe {
     //Work out your cost 
     protected double calculateBaseCost() {
         double cost = pipeArea() * costPerInch[grade];
-        if (chemicalResistance)
+        if (chemicalResistance) {
             costTotal *= 1.14;
+        }
         return cost;
     }
 
@@ -92,6 +93,9 @@ public abstract class Pipe {
     protected void calculateCost() {
         costTotal = calculateBaseCost();
 
+    }
+    protected void convertToInches(){
+        
     }
 
 }
