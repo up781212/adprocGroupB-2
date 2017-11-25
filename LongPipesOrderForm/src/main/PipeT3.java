@@ -6,4 +6,11 @@ public class PipeT3 extends Pipe {
         super(grade, chemicalResistance, length, outerDiameter);
         costPerInch = new double[]{0.75, 0.8, 0.95};//set cost per inch
     }
+    public void calculateCost() {
+        double cost = calculateBaseCost();
+        costTotal *= 1.16; //add 1 colour
+        if (getChemicalResistance()) {
+            costTotal = cost * 1.14;
+        }
+    }
 }
