@@ -16,7 +16,7 @@ public class PipeT4 extends PipeT3 {
         costIncrease = cost * 0.16; //add 2 colours
         costIncrease += cost * 0.13; //adds Inner Insulation
         if (getChemicalResistance()) {
-            costIncrease += cost * 1.14;
+            costIncrease += cost * 0.14;
         }
         cost += costIncrease;
         //Not sure if this works better?
