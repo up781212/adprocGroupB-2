@@ -74,7 +74,7 @@ public abstract class Pipe {
 
     //Work out area of cylinder
     private double cylinderArea(double d) {
-        return Math.PI * (d / 2) * length;
+        return Math.PI * ((d / 2)*(d / 2)) * length; //Is that right?
     }
 
     //Work out your cost 
