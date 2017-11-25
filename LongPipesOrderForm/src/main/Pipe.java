@@ -12,7 +12,7 @@ public abstract class Pipe {
     private boolean chemicalResistance; //Available for all 
     protected double[] costPerInch; //Used to display available grades and their equivilence 
     protected double costTotal; //The total cost of the pipe
-
+    protected int colour;
     /*
     ALL INPUT UNITS IN INCHES FOR SIMPLICITY. 
     MAKE SURE CONVERSION IS DONE ON INPUT

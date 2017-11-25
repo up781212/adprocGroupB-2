@@ -11,15 +11,15 @@ DO NOT REFERENCE PIPE OR ITS CHILDREN DIRECTLY WHEN CREATING PIPES!!!
 public class PipeFactory {
 
     //checks the pipe type from criteria and uses to validate.
-    public Boolean PipeCheck(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement) {
+    public Boolean PipeCheck(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
         //if it's 0 then the pipe is not valid, any other value is.
-        return ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement) == 0;
+        return ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour) != 0;
 
     }
 
     //improve this later, checks pipe type and then creates an object of that type
-    public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement) {
-        byte type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement);
+    public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
+        byte type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour);
         switch (type) {
             case 1:
                 PipeT1 pip = new PipeT1(grade, chemicalResistance, length, outerDiameter);
@@ -40,7 +40,26 @@ public class PipeFactory {
 
     }
 
-    private byte ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement) {
+    //checks if a pipe is valid and returns a byte of the pipe's type. 0 is given in the case of a pipe being invalid.
+    private byte ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
+        if (colour == 2 && grade >= 2) {
+            if (innerInsulation) {
+                if (outerReinforcement && grade >= 3) {
+                    return 5;
+                } else {
+                    return 4;
+                }
+            }
+            return 3;
+        }
+        if (!innerInsulation && !outerReinforcement) {
+            if (colour == 1 && grade >= 2 && grade <= 4) {
+                return 2;
+            }
+            if (colour == 0 && grade <= 3) {
+                return 1;
+            }
+        }
         return 0;
     }
 }
