@@ -95,7 +95,7 @@ public abstract class Pipe {
 
     }
     protected void convertToInches(){
-        
+        length *= 39.3701
     }
 
 }
