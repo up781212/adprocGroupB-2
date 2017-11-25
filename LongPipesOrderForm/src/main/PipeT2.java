@@ -9,7 +9,7 @@ public class PipeT2 extends Pipe {
 
     public void calculateCost() {
         double cost = calculateBaseCost();
-        costTotal *= 1.16; //add 1 colour
+        costTotal *= 1.12; //add 1 colour
         if (getChemicalResistance()) {
             costTotal = cost * 1.14;
         }
