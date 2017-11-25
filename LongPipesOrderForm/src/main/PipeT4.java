@@ -9,4 +9,16 @@ public class PipeT4 extends PipeT3 {
         super(grade, chemicalResistance, length, outerDiameter);
         this.innerInsulation = innerInsulation;
     }
+    
+    public void calculateCost() {
+        double cost = calculateBaseCost();
+        double costIncrease;
+        costIncrease = cost * 0.16; //add 2 colours
+        costIncrease += cost * 0.13; //adds Inner Insulation
+        if (getChemicalResistance()) {
+            costIncrease += cost * 1.14;
+        }
+        cost += costIncrease;
+        //Not sure if this works better?
+    }
 }
