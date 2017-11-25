@@ -18,7 +18,7 @@ public class PipeT4 extends PipeT3 {
         if (getChemicalResistance()) {
             costIncrease += cost * 0.14;
         }
-        cost += costIncrease;
+        costTotal = cost + costIncrease;
         //Not sure if this works better?
     }
 }
