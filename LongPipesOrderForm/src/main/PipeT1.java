@@ -7,4 +7,11 @@ public class PipeT1 extends Pipe {
         costPerInch = new double[]{0.4,0.6,0.75}; //SET COST PER INCH FOR CLASS
     }
     
+    public void calculateCostT1() {
+        double cost = calculateBaseCost();
+        if (getChemicalResistance()) {
+            costTotal = cost * 1.14;
+        }
+    }
+    
 }
