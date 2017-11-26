@@ -2,11 +2,14 @@ package main;
 
 public class PipeT5 extends PipeT4 {
 
-    boolean outerReinforcement;
-
-    public PipeT5(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement) {
-        super(grade, chemicalResistance, length, outerDiameter, innerInsulation);
+    public PipeT5(int grade, boolean chemicalResistance, double length, double outerDiameter) {
+        super(grade, chemicalResistance, length, outerDiameter);
         costPerInch = new double[]{0.75, 0.8, 0.95};//set cost per inch
-        this.outerReinforcement = outerReinforcement;
+        calculateCostT5();
     }
+
+    public void calculateCostT5() {
+        costTotal += baseCost * 0.17;//add Inner insulation
+    }
+
 }

@@ -12,7 +12,7 @@ public abstract class Pipe {
     private boolean chemicalResistance; //Available for all 
     protected double[] costPerInch; //Used to display available grades and their equivilence 
     protected double costTotal; //The total cost of the pipe
-    protected int colour;
+    protected double baseCost; //The base cost 
     /*
     ALL INPUT UNITS IN INCHES FOR SIMPLICITY. 
     MAKE SURE CONVERSION IS DONE ON INPUT
@@ -74,12 +74,14 @@ public abstract class Pipe {
 
     //Work out area of cylinder
     private double cylinderArea(double d) {
-        return Math.PI * (d / 2) * length;
+        return Math.PI * Math.pow((d / 2), 2) * length;
     }
 
     //Work out your cost 
     protected double calculateBaseCost() {
         double cost = pipeArea() * costPerInch[grade];
+        baseCost = cost;
+        
         if (chemicalResistance) {
             costTotal *= 1.14;
         }
@@ -94,8 +96,6 @@ public abstract class Pipe {
         costTotal = calculateBaseCost();
 
     }
-    protected void convertToInches(){
-        
-    }
+
 
 }

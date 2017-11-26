@@ -19,6 +19,8 @@ public class PipeFactory {
 
     //improve this later, checks pipe type and then creates an object of that type
     public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
+        length = convertToInches(length);//convert length to inches, all values are the same type within pipe classes.
+
         byte type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour);
         switch (type) {
             case 1:
@@ -31,10 +33,10 @@ public class PipeFactory {
                 PipeT3 pip3 = new PipeT3(grade, chemicalResistance, length, outerDiameter);
                 return pip3;
             case 4:
-                PipeT4 pip4 = new PipeT4(grade, chemicalResistance, length, outerDiameter, innerInsulation);
+                PipeT4 pip4 = new PipeT4(grade, chemicalResistance, length, outerDiameter);
                 return pip4;
             default:
-                PipeT5 pip5 = new PipeT5(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement);
+                PipeT5 pip5 = new PipeT5(grade, chemicalResistance, length, outerDiameter);
                 return pip5;
         }
 
@@ -61,5 +63,13 @@ public class PipeFactory {
             }
         }
         return 0;
+    }
+
+    protected double convertToInches(double meter) {
+        return meter * 39.37;
+    }
+
+    protected double convertToMeters(double inch) {
+        return inch * 0.0254;
     }
 }
