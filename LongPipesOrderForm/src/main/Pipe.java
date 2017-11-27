@@ -71,9 +71,8 @@ public abstract class Pipe {
     }
 
     //Work out area of cylinder
-    private double cylinderVolume(double d) {
-        //formula for area of a cylindar.
-        return Math.PI * Math.pow((d / 2), 2) * length;
+    private double cylinderArea(double d) {
+        return Math.PI * ((d / 2)*(d / 2)) * length; //Is that right?
     }
 
     //Work out your cost 
