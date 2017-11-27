@@ -1,8 +1,14 @@
 package main;
 
+/**
+ *
+ * @author 781212, 788777, 777611, 790487
+ *
+ */
+
 /*
 Welcome to the Pipe Factory!
-Here pipes are made based on the input criteria given 
+Here pipes are made based on the input criteria given
 (aka check the different features of the pipe, then create the right tier in the return)
 
 Please input the data from user input here for validation and to determine which pipe is needed,

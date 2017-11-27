@@ -1,19 +1,25 @@
 package main;
 
+/**
+ *
+ * @author 781212, 788777, 777611, 790487
+ *
+ */
+
 //UPDATE SUBCLASSES TO BE MORE STRUCTURED INSTEAD OF ALL COMING OFF OF THIS DIRECTLY
-/* 
-Ah, a glorious Pipe! 
+/*
+Ah, a glorious Pipe!
 Or, Picasso's implementation of one... Make sure not to reference this class
 directly to make a pipe. PipeFactory will do the work for you.
  */
 public abstract class Pipe {
 
     private int grade; //Grade 1-5
-    private boolean chemicalResistance; //Available for all 
-    protected double[] costPerInch; //Used to display available grades and their equivilence 
+    private boolean chemicalResistance; //Available for all
+    protected double[] costPerInch; //Used to display available grades and their equivilence
     protected double costTotal; //The total cost of the pipe
-    protected double baseCost; //The base cost 
-    
+    protected double baseCost; //The base cost
+
     //All dimensions stored in inches
     private double length;
     private double outerDiameter;
@@ -76,20 +82,20 @@ public abstract class Pipe {
         return Math.PI * Math.pow((d / 2), 2) * length;
     }
 
-    //Work out your cost 
+    //Work out your cost
     protected double calculateBaseCost() {
         double cost = pipeVolume() * costPerInch[grade];
         baseCost = cost;
-        
+
         if (chemicalResistance) {
             costTotal *= 1.14;//add chemical resistance
         }
         return cost;
     }
 
-    /*Other additionalCosts can be calculated here. 
-    The base cost is universal. 
-    Class is overridden in every Type with exception to 
+    /*Other additionalCosts can be calculated here.
+    The base cost is universal.
+    Class is overridden in every Type with exception to
     T1 in order to add all additional costs.
      */
     protected void calculateCost() {
