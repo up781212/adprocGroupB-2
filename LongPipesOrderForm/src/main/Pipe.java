@@ -13,11 +13,8 @@ public abstract class Pipe {
     protected double[] costPerInch; //Used to display available grades and their equivilence 
     protected double costTotal; //The total cost of the pipe
     protected double baseCost; //The base cost 
-    /*
-    ALL INPUT UNITS IN INCHES FOR SIMPLICITY. 
-    MAKE SURE CONVERSION IS DONE ON INPUT
-     */
-    //All stored in inches
+    
+    //All dimensions stored in inches
     private double length;
     private double outerDiameter;
     private double innerDiameter;
@@ -68,34 +65,36 @@ public abstract class Pipe {
     METHODS
      */
     //Work out area of pipe
-    private double pipeArea() {
-        return cylinderArea(outerDiameter) - cylinderArea(innerDiameter);
+    private double pipeVolume() {
+        //subtract volume inside of the pipe from the total volume to get pipe volume
+        return cylinderVolume(outerDiameter) - cylinderVolume(innerDiameter);
     }
 
     //Work out area of cylinder
-    private double cylinderArea(double d) {
+    private double cylinderVolume(double d) {
+        //formula for area of a cylindar.
         return Math.PI * Math.pow((d / 2), 2) * length;
     }
 
     //Work out your cost 
     protected double calculateBaseCost() {
-        double cost = pipeArea() * costPerInch[grade];
+        double cost = pipeVolume() * costPerInch[grade];
         baseCost = cost;
         
         if (chemicalResistance) {
-            costTotal *= 1.14;
+            costTotal *= 1.14;//add chemical resistance
         }
         return cost;
     }
 
     /*Other additionalCosts can be calculated here. 
     The base cost is universal. 
-    Less checks having to be done overall this way.
+    Class is overridden in every Type with exception to 
+    T1 in order to add all additional costs.
      */
     protected void calculateCost() {
         costTotal = calculateBaseCost();
 
     }
-
 
 }

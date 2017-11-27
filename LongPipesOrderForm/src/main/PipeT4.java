@@ -7,7 +7,8 @@ public class PipeT4 extends PipeT3 {
         super(grade, chemicalResistance, length, outerDiameter);
         calculateCostT4();
     }
-    public void calculateCostT4(){
+
+    public void calculateCostT4() {
         costTotal += baseCost * 0.13;//add Inner insulation
     }
 }

@@ -14,7 +14,6 @@ public class PipeFactory {
     public Boolean PipeCheck(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
         //if it's 0 then the pipe is not valid, any other value is.
         return ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour) != 0;
-
     }
 
     //improve this later, checks pipe type and then creates an object of that type
@@ -24,8 +23,8 @@ public class PipeFactory {
         byte type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour);
         switch (type) {
             case 1:
-                PipeT1 pip = new PipeT1(grade, chemicalResistance, length, outerDiameter);
-                return pip;
+                PipeT1 pip1 = new PipeT1(grade, chemicalResistance, length, outerDiameter);
+                return pip1;
             case 2:
                 PipeT2 pip2 = new PipeT2(grade, chemicalResistance, length, outerDiameter);
                 return pip2;
@@ -44,25 +43,29 @@ public class PipeFactory {
 
     //checks if a pipe is valid and returns a byte of the pipe's type. 0 is given in the case of a pipe being invalid.
     private byte ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
-        if (colour == 2 && grade >= 2) {
-            if (innerInsulation) {
-                if (outerReinforcement && grade >= 3) {
-                    return 5;
-                } else {
-                    return 4;
+        if (grade > 0 && colour >= 0 && colour <= 2) {
+            if (colour == 2 && grade >= 2) {
+                if (innerInsulation) {
+                    if (outerReinforcement && grade >= 3) {
+                        return 5; //type 5
+                    } else {
+                        return 4; //type 4
+                    }
+                }
+                if (!innerInsulation && !outerReinforcement) {
+                    return 3; //type 3
                 }
             }
-            return 3;
-        }
-        if (!innerInsulation && !outerReinforcement) {
-            if (colour == 1 && grade >= 2 && grade <= 4) {
-                return 2;
+            if (!innerInsulation && !outerReinforcement) {
+                if (colour == 1 && grade >= 2 && grade <= 4) {
+                    return 2; //type 2
+                }
+                if (colour == 0 && grade <= 3) {
+                    return 1; //type 1
+                }
             }
-            if (colour == 0 && grade <= 3) {
-                return 1;
-            }
         }
-        return 0;
+        return 0; //grade invalid. Either invalid input or invalid type
     }
 
     protected double convertToInches(double meter) {
