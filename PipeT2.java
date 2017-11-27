@@ -1,5 +1,11 @@
 package main;
 
+/**
+ *
+ * @author 781212
+ *
+ */
+
 public class PipeT2 extends Pipe {
 
     public PipeT2(int grade, boolean chemicalResistance, double length, double outerDiameter) {

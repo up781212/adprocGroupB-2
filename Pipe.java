@@ -1,5 +1,11 @@
 package main;
 
+/**
+ *
+ * @author 781212
+ *
+ */
+
 //UPDATE SUBCLASSES TO BE MORE STRUCTURED INSTEAD OF ALL COMING OFF OF THIS DIRECTLY
 /* 
 Ah, a glorious Pipe! 
@@ -71,8 +77,9 @@ public abstract class Pipe {
     }
 
     //Work out area of cylinder
-    private double cylinderArea(double d) {
-        return Math.PI * ((d / 2)*(d / 2)) * length; //Is that right?
+    private double cylinderVolume(double d) {
+        //formula for area of a cylindar.
+        return Math.PI * Math.pow((d / 2), 2) * length;
     }
 
     //Work out your cost 

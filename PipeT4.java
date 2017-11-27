@@ -1,5 +1,11 @@
 package main;
 
+/**
+ *
+ * @author 781212
+ *
+ */
+
 public class PipeT4 extends PipeT3 {
 
     //costPerInch not needed, T3 and 4 share the same cost per inch.
