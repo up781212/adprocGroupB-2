@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.awt.Color;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -198,6 +199,8 @@ public class GUI extends javax.swing.JFrame {
         btnClear.setText("Clear order");
 
         lbxOrderList.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        lbxOrderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lbxOrderList.setToolTipText("");
         jScrollPane4.setViewportView(lbxOrderList);
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -363,7 +366,13 @@ public class GUI extends javax.swing.JFrame {
             //Finally add the pipe!
             pipes.add(pipeFactory.MakePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                     cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue()));
-
+            
+            DefaultListModel<String> model = new DefaultListModel<String>();
+            for(Pipe pipe : pipes){
+                model.addElement(Integer.toString(pipe.getGrade()+1));
+            }
+            lbxOrderList.setModel(model);
+            
             err += "\n Added Successfully!";
             tbxError.setForeground(Color.BLACK);
             tbxError.setText(err);

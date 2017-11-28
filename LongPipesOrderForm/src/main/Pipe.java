@@ -14,7 +14,7 @@ directly to make a pipe. PipeFactory will do the work for you.
  */
 public abstract class Pipe {
     private int qty;
-    private int grade; //Grade 1-5
+    protected int grade; //Grade 1-5
     private boolean chemicalResistance; //Available for all
     protected double[] costPerInch; //Used to display available grades and their equivilence
     protected double costTotal; //The total cost of the pipe

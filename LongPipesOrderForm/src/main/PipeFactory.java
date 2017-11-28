@@ -48,7 +48,7 @@ public class PipeFactory {
                 if (innerInsulation) {
                     if (outerReinforcement && grade >= 3) {
                         return "Type 5"; //type 5
-                    } else {
+                    } else if (!outerReinforcement){
                         return "Type 4"; //type 4
                     }
                 }
