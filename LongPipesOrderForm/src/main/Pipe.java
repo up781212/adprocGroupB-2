@@ -32,7 +32,6 @@ public abstract class Pipe {
         this.outerDiameter = outerDiameter;
         innerDiameter = outerDiameter * 0.9;
         this.qty = qty;
-        calculateCost();
     }
 
     public int getGrade() {
@@ -90,7 +89,7 @@ public abstract class Pipe {
 
         if (chemicalResistance) {
             costTotal *= 1.14;//add chemical resistance
-        }
+        }   
         return cost;
     }
 

@@ -90,9 +90,9 @@
                       <Component id="btnAdd" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmxReinforcement" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbInsulation" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmxChemicalResistance" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbxReinforcement" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbxInsulation" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbxChemicalResistance" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -154,11 +154,11 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cmbInsulation" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxInsulation" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmxReinforcement" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxReinforcement" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmxChemicalResistance" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxChemicalResistance" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -237,7 +237,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="cmbInsulation">
+        <Component class="javax.swing.JCheckBox" name="cbxInsulation">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="11" style="0"/>
@@ -245,7 +245,7 @@
             <Property name="text" type="java.lang.String" value="Insulation"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="cmxReinforcement">
+        <Component class="javax.swing.JCheckBox" name="cbxReinforcement">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="11" style="0"/>
@@ -253,7 +253,7 @@
             <Property name="text" type="java.lang.String" value="Reinforcement"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="cmxChemicalResistance">
+        <Component class="javax.swing.JCheckBox" name="cbxChemicalResistance">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="11" style="0"/>
@@ -262,7 +262,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmxChemicalResistanceActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxChemicalResistanceActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
@@ -295,7 +295,7 @@
         <Component class="javax.swing.JSpinner" name="spnQty">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+              <SpinnerModel initial="1" maximum="100" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
           </Properties>
         </Component>

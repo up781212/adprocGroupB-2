@@ -8,7 +8,7 @@ package main;
 
 public class PipeT2 extends Pipe {
 
-    public PipeT2(int grade, boolean chemicalResistance, double length, double outerDiameter, byte qty) {
+    public PipeT2(int grade, boolean chemicalResistance, double length, double outerDiameter, int qty) {
         super(grade, chemicalResistance, length, outerDiameter, qty);
         costPerInch = new double[]{0.6, 0.75, 0.8};//set cost per inch
         calculateCost();

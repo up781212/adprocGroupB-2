@@ -44,9 +44,9 @@ public class GUI extends javax.swing.JFrame {
         cbxGrade = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         cbxColour = new javax.swing.JComboBox<>();
-        cmbInsulation = new javax.swing.JCheckBox();
-        cmxReinforcement = new javax.swing.JCheckBox();
-        cmxChemicalResistance = new javax.swing.JCheckBox();
+        cbxInsulation = new javax.swing.JCheckBox();
+        cbxReinforcement = new javax.swing.JCheckBox();
+        cbxChemicalResistance = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
@@ -89,18 +89,18 @@ public class GUI extends javax.swing.JFrame {
 
         cbxColour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Colour", "1 Colour", "2 Colours" }));
 
-        cmbInsulation.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        cmbInsulation.setText("Insulation");
+        cbxInsulation.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        cbxInsulation.setText("Insulation");
 
-        cmxReinforcement.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        cmxReinforcement.setText("Reinforcement");
+        cbxReinforcement.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        cbxReinforcement.setText("Reinforcement");
 
-        cmxChemicalResistance.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        cmxChemicalResistance.setText("Chemical resistance");
-        cmxChemicalResistance.setToolTipText("");
-        cmxChemicalResistance.addActionListener(new java.awt.event.ActionListener() {
+        cbxChemicalResistance.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        cbxChemicalResistance.setText("Chemical resistance");
+        cbxChemicalResistance.setToolTipText("");
+        cbxChemicalResistance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmxChemicalResistanceActionPerformed(evt);
+                cbxChemicalResistanceActionPerformed(evt);
             }
         });
 
@@ -118,7 +118,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        spnQty.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        spnQty.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,9 +130,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmxReinforcement)
-                            .addComponent(cmbInsulation)
-                            .addComponent(cmxChemicalResistance)
+                            .addComponent(cbxReinforcement)
+                            .addComponent(cbxInsulation)
+                            .addComponent(cbxChemicalResistance)
                             .addComponent(jLabel11)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
@@ -178,11 +178,11 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbInsulation)
+                .addComponent(cbxInsulation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmxReinforcement)
+                .addComponent(cbxReinforcement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmxChemicalResistance)
+                .addComponent(cbxChemicalResistance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -307,9 +307,9 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmxChemicalResistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmxChemicalResistanceActionPerformed
+    private void cbxChemicalResistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxChemicalResistanceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmxChemicalResistanceActionPerformed
+    }//GEN-LAST:event_cbxChemicalResistanceActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
@@ -325,11 +325,15 @@ public class GUI extends javax.swing.JFrame {
         //Set error variable to clear
         tbxError.setText("");
         String err = "";
+        byte grade = 0;
+        double length = 0;
+        double diameter = 0;
+
         //check textboxes are valid input (non-empty and parse to double)        
         try {
-            double length = Double.parseDouble(tbxLength.getText());
+            length = Double.parseDouble(tbxLength.getText());
             if (length > maxLength || length <= 0) {
-                err += "Length is invalid. Must be between 0 and 6.\n";
+                err += "Length is invalid. Must be between 0 and 6 centimeters.\n";
             } else {
 
             }
@@ -338,34 +342,35 @@ public class GUI extends javax.swing.JFrame {
             err += "Length is not a number. \n";
         }
         try {
-            double diameter = Double.parseDouble(tbxDiameter.getText());
+            diameter = Double.parseDouble(tbxDiameter.getText());
             if (diameter > maxDiameter || diameter <= 0) {
-                err += "Diameter is invalid. Must be between 0 and 4.\n";
+                err += "Diameter is invalid. Must be between 0 and 4 inches.\n";
             }
         } catch (NumberFormatException e) {
             //Not a Number
             err += "Diameter is not a number. \n";
         }
-        if ((int) spnQty.getValue() > maxQty || (int) spnQty.getValue() < 1) {
-            err += "Quantity needs to be between 1 and 101.\n";
 
+        //store current grade
+        grade = (byte) cbxGrade.getSelectedIndex();
+        grade++;
+
+        //test the pipe is okay.
+        String testPipe = pipeFactory.ValidatePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
+                cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue());
+
+        if (testPipe.charAt(0) != 'E' && err == "") {
+            //Finally add the pipe!
+            pipes.add(pipeFactory.MakePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
+                    cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue()));
+
+            err += "\n Added Successfully!";
+            tbxError.setForeground(Color.BLACK);
+            tbxError.setText(err);
         } else {
-
-        }
-        
-        
-        
-        
-        
-        
-        
-        //Set Error Text
-        if (err != "") {
+            err += testPipe;
             tbxError.setForeground(Color.RED);
             tbxError.setText("Error:\n" + err);
-        } else {
-            tbxError.setForeground(Color.BLACK);
-            tbxError.setText("Item added succussfully!");
         }
 
 
@@ -422,11 +427,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JCheckBox cbxChemicalResistance;
     private javax.swing.JComboBox<String> cbxColour;
     private javax.swing.JComboBox<String> cbxGrade;
-    private javax.swing.JCheckBox cmbInsulation;
-    private javax.swing.JCheckBox cmxChemicalResistance;
-    private javax.swing.JCheckBox cmxReinforcement;
+    private javax.swing.JCheckBox cbxInsulation;
+    private javax.swing.JCheckBox cbxReinforcement;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

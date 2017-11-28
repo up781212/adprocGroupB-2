@@ -17,7 +17,7 @@ DO NOT REFERENCE PIPE OR ITS CHILDREN DIRECTLY WHEN CREATING PIPES!!!
 public class PipeFactory {
 
     //improve this later, checks pipe type and then creates an object of that type
-    public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, byte qty) {
+    public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, int qty) {
         length = convertToInches(length);//convert length to inches, all values are the same type within pipe classes.
 
         String type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour, qty);
@@ -41,7 +41,7 @@ public class PipeFactory {
 
     }
 
-    //checks if a pipe is valid and returns a byte of the pipe's type. 0 is given in the case of a pipe being invalid.
+    //checks if a pipe is valid and returns a String of the pipe's type. Error is given in the case of a pipe being invalid.
     public String ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, int qty) {
         if (grade > 0 && colour >= 0 && colour <= 2) {
             if (colour == 2 && grade >= 2) {
