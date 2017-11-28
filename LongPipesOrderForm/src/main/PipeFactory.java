@@ -16,62 +16,56 @@ DO NOT REFERENCE PIPE OR ITS CHILDREN DIRECTLY WHEN CREATING PIPES!!!
  */
 public class PipeFactory {
 
-    //checks the pipe type from criteria and uses to validate.
-    public Boolean PipeCheck(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
-        //if it's 0 then the pipe is not valid, any other value is.
-        return ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour) != 0;
-    }
-
     //improve this later, checks pipe type and then creates an object of that type
-    public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
+    public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, byte qty) {
         length = convertToInches(length);//convert length to inches, all values are the same type within pipe classes.
 
-        byte type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour);
+        String type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour, qty);
         switch (type) {
-            case 1:
-                PipeT1 pip1 = new PipeT1(grade, chemicalResistance, length, outerDiameter);
+            case "Type 1":
+                PipeT1 pip1 = new PipeT1(grade, chemicalResistance, length, outerDiameter, qty);
                 return pip1;
-            case 2:
-                PipeT2 pip2 = new PipeT2(grade, chemicalResistance, length, outerDiameter);
+            case "Type 2":
+                PipeT2 pip2 = new PipeT2(grade, chemicalResistance, length, outerDiameter, qty);
                 return pip2;
-            case 3:
-                PipeT3 pip3 = new PipeT3(grade, chemicalResistance, length, outerDiameter);
+            case "Type 3":
+                PipeT3 pip3 = new PipeT3(grade, chemicalResistance, length, outerDiameter, qty);
                 return pip3;
-            case 4:
-                PipeT4 pip4 = new PipeT4(grade, chemicalResistance, length, outerDiameter);
+            case "Type 4":
+                PipeT4 pip4 = new PipeT4(grade, chemicalResistance, length, outerDiameter, qty);
                 return pip4;
             default:
-                PipeT5 pip5 = new PipeT5(grade, chemicalResistance, length, outerDiameter);
+                PipeT5 pip5 = new PipeT5(grade, chemicalResistance, length, outerDiameter, qty);
                 return pip5;
         }
 
     }
 
     //checks if a pipe is valid and returns a byte of the pipe's type. 0 is given in the case of a pipe being invalid.
-    private byte ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour) {
+    public String ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, int qty) {
         if (grade > 0 && colour >= 0 && colour <= 2) {
             if (colour == 2 && grade >= 2) {
                 if (innerInsulation) {
                     if (outerReinforcement && grade >= 3) {
-                        return 5; //type 5
+                        return "Type 5"; //type 5
                     } else {
-                        return 4; //type 4
+                        return "Type 4"; //type 4
                     }
                 }
                 if (!innerInsulation && !outerReinforcement) {
-                    return 3; //type 3
+                    return "Type 3"; //type 3
                 }
             }
             if (!innerInsulation && !outerReinforcement) {
                 if (colour == 1 && grade >= 2 && grade <= 4) {
-                    return 2; //type 2
+                    return "Type 2"; //type 2
                 }
                 if (colour == 0 && grade <= 3) {
-                    return 1; //type 1
+                    return "Type 1"; //type 1
                 }
             }
         }
-        return 0; //grade invalid. Either invalid input or invalid type
+        return "Error"; //grade invalid. Either invalid input or invalid type
     }
 
     protected double convertToInches(double meter) {
