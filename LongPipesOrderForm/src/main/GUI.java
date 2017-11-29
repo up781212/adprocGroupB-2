@@ -424,6 +424,7 @@ public class GUI extends javax.swing.JFrame {
             err += "\n Added Successfully!";
             tbxError.setForeground(Color.BLACK);
             tbxError.setText(err);
+            updateTotal();
         } else {
             err += testPipe;
             tbxError.setForeground(Color.RED);
@@ -440,10 +441,23 @@ public class GUI extends javax.swing.JFrame {
         if (selectedItem != -1) {
             model.remove(selectedItem);
             pipes.remove(selectedItem);
+            updateTotal();
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    
+    
+    //Update total cost in tbxTotal
+    private void updateTotal(){
+        int total = 0;
+        for (Pipe pipe : pipes){
+            total += pipe.getCostTotal();
+        }
+        tbxTotal.setText(Integer.toString(total));
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
