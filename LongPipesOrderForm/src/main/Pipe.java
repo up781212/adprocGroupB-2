@@ -85,7 +85,7 @@ public abstract class Pipe {
         if (chemicalResistance) {
             return "Yes";
         }
-        return "no ";
+        return "No ";
     }
 
     /*
