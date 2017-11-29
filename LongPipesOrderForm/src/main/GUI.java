@@ -18,6 +18,9 @@ public class GUI extends javax.swing.JFrame {
     //Used for creating and validating pipes.
     private PipeFactory pipeFactory = new PipeFactory();
 
+    //To make sure everything looks tidy!(adds formatting)
+    private DecimalFormat dec = new DecimalFormat("#.00");
+    
     //Set maximum limits on quantity, width and height. (100, 6m, 4in respectively)
     private final int maxLength = 6, maxDiameter = 4, maxQty = 100;
 
@@ -237,6 +240,7 @@ public class GUI extends javax.swing.JFrame {
         });
 
         tbxTotal.setEditable(false);
+        tbxTotal.setText("0");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel14.setText("Total (£):");
@@ -260,7 +264,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 418, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnDelete)
@@ -389,8 +393,6 @@ public class GUI extends javax.swing.JFrame {
             pipes.add(pipeFactory.MakePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                     cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue()));
 
-            //To make sure everything looks tidy!
-            DecimalFormat dec = new DecimalFormat("#.00");
             Pipe p = pipes.get(pipes.size() - 1); //get last pipe added.
 
             /*TIDY THIS UP*/
@@ -451,13 +453,12 @@ public class GUI extends javax.swing.JFrame {
             if (selectedItem != -1) {
                 lbxOrderList.setSelectedIndex(selectedItem);
             } else {
-                lbxOrderList.setSelectedIndex(selectedItem+1);
+                lbxOrderList.setSelectedIndex(selectedItem + 1);
             }
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
-    
-    
+
     //button to remove all from current order.
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         pipes.clear();
@@ -467,11 +468,11 @@ public class GUI extends javax.swing.JFrame {
 
     //Update total cost in tbxTotal
     private void updateTotal() {
-        int total = 0;
+        double total = 0;
         for (Pipe pipe : pipes) {
             total += pipe.getCostTotal();
         }
-        tbxTotal.setText(Integer.toString(total));
+        tbxTotal.setText(dec.format(total));
     }
 
     /**
