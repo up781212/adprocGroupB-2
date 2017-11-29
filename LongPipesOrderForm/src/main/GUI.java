@@ -157,7 +157,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbxColour, 0, 92, Short.MAX_VALUE)
+                                    .addComponent(cbxColour, 0, 1, Short.MAX_VALUE)
                                     .addComponent(cbxGrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -201,6 +201,11 @@ public class GUI extends javax.swing.JFrame {
 
         btnClear.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         btnClear.setText("Clear order");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         lbxOrderList.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         lbxOrderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -253,7 +258,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,6 +456,14 @@ public class GUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
+    
+    
+    //button to remove all from current order.
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        pipes.clear();
+        model.clear();
+        updateTotal();
+    }//GEN-LAST:event_btnClearActionPerformed
 
     //Update total cost in tbxTotal
     private void updateTotal() {
