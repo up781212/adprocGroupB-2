@@ -8,7 +8,7 @@ package main;
 public class PipeT3 extends Pipe {
 
     public PipeT3(int grade, boolean chemicalResistance, double length, double outerDiameter, int qty) {
-        super(grade - 2, chemicalResistance, length, outerDiameter, qty,2);
+        super(grade - 2, chemicalResistance, length, outerDiameter, qty, 2);
         costPerInch = new double[]{0.6, 0.75, 0.8, 0.95};//set cost per inch
         calculateCost();
     }
@@ -16,6 +16,7 @@ public class PipeT3 extends Pipe {
     @Override
     public void calculateCost() {
         double cost = calculateBaseCost();
+        costTotal = cost;
         costTotal += cost * 0.16; //add 1 colour
     }
 

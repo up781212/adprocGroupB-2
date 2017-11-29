@@ -17,6 +17,7 @@ public class PipeT2 extends Pipe {
     @Override
     public void calculateCost() {
         double cost = calculateBaseCost();
+        costTotal = cost;
         costTotal += cost * 0.12; //add 1 colour
     }
     

@@ -438,26 +438,29 @@ public class GUI extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedItem = lbxOrderList.getSelectedIndex();
         //check selected, if so remove from the model and the pipes arraylist
-        if (selectedItem != -1) {
+        if (selectedItem > -1) {
             model.remove(selectedItem);
             pipes.remove(selectedItem);
             updateTotal();
+            //select item below the deleted, if the deleted one
+            if (selectedItem != -1) {
+                lbxOrderList.setSelectedIndex(selectedItem);
+            } else {
+                lbxOrderList.setSelectedIndex(selectedItem+1);
+            }
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    
-    
     //Update total cost in tbxTotal
-    private void updateTotal(){
+    private void updateTotal() {
         int total = 0;
-        for (Pipe pipe : pipes){
+        for (Pipe pipe : pipes) {
             total += pipe.getCostTotal();
         }
         tbxTotal.setText(Integer.toString(total));
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */

@@ -50,7 +50,6 @@ public abstract class Pipe {
     }
 
     public double getCostTotal() {
-        calculateCost();
         return costTotal * qty;
     }
 
@@ -108,11 +107,10 @@ public abstract class Pipe {
     protected double calculateBaseCost() {
         double cost = pipeVolume() * costPerInch[grade];
         baseCost = cost;
-
-        if (chemicalResistance) {
-            costTotal = baseCost * 0.14;//add chemical resistance
-        }
         costTotal = cost;
+        if (chemicalResistance) {
+            cost += baseCost * 0.14;//add chemical resistance
+        }
         return cost;
     }
 
