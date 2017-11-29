@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.awt.Color;
+import java.text.DecimalFormat;
 import javax.swing.DefaultListModel;
 
 /**
@@ -12,6 +13,8 @@ public class GUI extends javax.swing.JFrame {
 
     //Store all pipes made by user.
     private ArrayList<Pipe> pipes = new ArrayList();
+    //model used to store displayed list of ordered items.
+    DefaultListModel<String> model = new DefaultListModel<String>();
     //Used for creating and validating pipes.
     private PipeFactory pipeFactory = new PipeFactory();
 
@@ -63,6 +66,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbxError = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Long Pipes Order Form");
@@ -198,7 +202,7 @@ public class GUI extends javax.swing.JFrame {
         btnClear.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         btnClear.setText("Clear order");
 
-        lbxOrderList.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        lbxOrderList.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         lbxOrderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lbxOrderList.setToolTipText("");
         jScrollPane4.setViewportView(lbxOrderList);
@@ -234,6 +238,8 @@ public class GUI extends javax.swing.JFrame {
         tbxError.setRows(5);
         jScrollPane2.setViewportView(tbxError);
 
+        jLabel4.setText("Grade | Colours | Length | Diameter |  Insulation | Reinforcement | Resistance | Quantity | Cost");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,7 +248,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,19 +263,25 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tbxTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(tbxTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear)
                     .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tbxTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,13 +378,45 @@ public class GUI extends javax.swing.JFrame {
             //Finally add the pipe!
             pipes.add(pipeFactory.MakePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                     cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue()));
+
+            //To make sure everything looks tidy!
+            DecimalFormat dec = new DecimalFormat("#.00");
+            Pipe p = pipes.get(pipes.size() - 1); //get last pipe added.
+
             
-            DefaultListModel<String> model = new DefaultListModel<String>();
-            for(Pipe pipe : pipes){
-                model.addElement(Integer.toString(pipe.getGrade()+1));
+            /*TIDY THIS UP*/
+            //adjust the length of spacing to format correctly
+            String spaceLen = "        ";
+            if (p.getQty() >= 10 && p.getQty() < 100) {
+                spaceLen = "       ";
             }
-            lbxOrderList.setModel(model);
+            if (p.getQty() == 100) {
+                spaceLen = "      ";
+            }
             
+            //add the new pipe to the UI so the user can view / delete pipes they do not want
+            model.addElement("   "
+                    + Integer.toString(p.getGrade() + 1)
+                    + "       "
+                    + p.getColour()
+                    + "   "
+                    + dec.format(pipeFactory.convertToMeters(p.getLength()))
+                    + "     "
+                    + dec.format(p.getOuterDiameter())
+                    + "       "
+                    + p.getInnerInsulation()
+                    + "          "
+                    + p.getOuterReinforcement()
+                    + "       "
+                    + p.getChemicalResistance()
+                    + spaceLen
+                    + p.getQty()
+                    + "  "
+                    + dec.format(p.getCostTotal()));
+            //end adding to element
+
+            lbxOrderList.setModel(model);
+
             err += "\n Added Successfully!";
             tbxError.setForeground(Color.BLACK);
             tbxError.setText(err);
@@ -447,6 +491,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
