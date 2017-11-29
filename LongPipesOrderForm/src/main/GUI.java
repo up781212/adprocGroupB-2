@@ -209,6 +209,11 @@ public class GUI extends javax.swing.JFrame {
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         btnSubmit.setText("Submit");
@@ -383,7 +388,6 @@ public class GUI extends javax.swing.JFrame {
             DecimalFormat dec = new DecimalFormat("#.00");
             Pipe p = pipes.get(pipes.size() - 1); //get last pipe added.
 
-            
             /*TIDY THIS UP*/
             //adjust the length of spacing to format correctly
             String spaceLen = "        ";
@@ -393,7 +397,7 @@ public class GUI extends javax.swing.JFrame {
             if (p.getQty() == 100) {
                 spaceLen = "      ";
             }
-            
+
             //add the new pipe to the UI so the user can view / delete pipes they do not want
             model.addElement("   "
                     + Integer.toString(p.getGrade() + 1)
@@ -428,6 +432,17 @@ public class GUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnAddActionPerformed
+
+    //delete a pipe from the order, removes both from the GUI JList and the ArrayList.
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedItem = lbxOrderList.getSelectedIndex();
+        //check selected, if so remove from the model and the pipes arraylist
+        if (selectedItem != -1) {
+            model.remove(selectedItem);
+            pipes.remove(selectedItem);
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
