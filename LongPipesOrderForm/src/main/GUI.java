@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -340,12 +341,21 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxChemicalResistanceActionPerformed
 
+    //pretend the order is submitted (beyond the scope of requirements)
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
+        if (pipes.size() != 0) {
+            JOptionPane.showMessageDialog(null, "Thank you, your order has been submitted!", "Submitted", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Your order is empty, please add items to order!", "Error: Empty Order", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    //when the cancel button is pressed, close the application on prompt
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
+        int close = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (close == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCancelActionPerformed
 
     //When Adding a new pipe to the order:
@@ -453,7 +463,7 @@ public class GUI extends javax.swing.JFrame {
             if (selectedItem < model.size()) {
                 lbxOrderList.setSelectedIndex(selectedItem);
             } else {
-                lbxOrderList.setSelectedIndex(selectedItem-1);
+                lbxOrderList.setSelectedIndex(selectedItem - 1);
             }
         }
 
