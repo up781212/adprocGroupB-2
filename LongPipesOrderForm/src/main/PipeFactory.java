@@ -65,7 +65,7 @@ public class PipeFactory {
                 }
             }
         }
-        return "Error"; //grade invalid. Either invalid input or invalid type
+        return "Error, this type of pipe is not available."; //grade invalid. Either invalid input or invalid type
     }
 
     protected double convertToInches(double meter) {
