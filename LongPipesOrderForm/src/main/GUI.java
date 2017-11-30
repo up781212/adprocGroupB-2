@@ -20,7 +20,7 @@ public class GUI extends javax.swing.JFrame {
 
     //To make sure everything looks tidy!(adds formatting)
     private DecimalFormat dec = new DecimalFormat("#.00");
-    
+
     //Set maximum limits on quantity, width and height. (100, 6m, 4in respectively)
     private final int maxLength = 6, maxDiameter = 4, maxQty = 100;
 
@@ -159,10 +159,10 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbxColour, 0, 1, Short.MAX_VALUE)
-                                    .addComponent(cbxGrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxGrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbxColour, 0, 90, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +240,7 @@ public class GUI extends javax.swing.JFrame {
         });
 
         tbxTotal.setEditable(false);
-        tbxTotal.setText("0");
+        tbxTotal.setText("0.00");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel14.setText("Total (£):");
@@ -264,7 +264,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 418, Short.MAX_VALUE)
+                        .addGap(0, 347, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnDelete)
@@ -450,10 +450,10 @@ public class GUI extends javax.swing.JFrame {
             pipes.remove(selectedItem);
             updateTotal();
             //select item below the deleted, if the deleted one
-            if (selectedItem != -1) {
-                lbxOrderList.setSelectedIndex(selectedItem);
+            if (selectedItem != 0) {
+                lbxOrderList.setSelectedIndex(selectedItem - 1);
             } else {
-                lbxOrderList.setSelectedIndex(selectedItem + 1);
+                lbxOrderList.setSelectedIndex(selectedItem);
             }
         }
 
@@ -472,7 +472,11 @@ public class GUI extends javax.swing.JFrame {
         for (Pipe pipe : pipes) {
             total += pipe.getCostTotal();
         }
-        tbxTotal.setText(dec.format(total));
+        if (total != 0) {
+            tbxTotal.setText(dec.format(total));
+        } else {
+            tbxTotal.setText("0.00");
+        }
     }
 
     /**
