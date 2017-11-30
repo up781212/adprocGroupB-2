@@ -449,11 +449,11 @@ public class GUI extends javax.swing.JFrame {
             model.remove(selectedItem);
             pipes.remove(selectedItem);
             updateTotal();
-            //select item below the deleted, if the deleted one
-            if (selectedItem != 0) {
-                lbxOrderList.setSelectedIndex(selectedItem - 1);
-            } else {
+            //Select the item at the same index as the deleted, if it doesn't exist pick the previous item.
+            if (selectedItem < model.size()) {
                 lbxOrderList.setSelectedIndex(selectedItem);
+            } else {
+                lbxOrderList.setSelectedIndex(selectedItem-1);
             }
         }
 
