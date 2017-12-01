@@ -443,7 +443,6 @@ public class GUI extends javax.swing.JFrame {
             tbxError.setText(err);
             updateTotal();
         } else {
-            err += testPipe;
             tbxError.setForeground(Color.RED);
             tbxError.setText("Error:\n" + err);
         }
