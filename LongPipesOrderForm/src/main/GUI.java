@@ -398,7 +398,7 @@ public class GUI extends javax.swing.JFrame {
         String testPipe = pipeFactory.ValidatePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                 cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue());
 
-        if (testPipe.charAt(0) != 'W' && err == "") {
+        if (testPipe.charAt(0) != 'E' && err == "") {
             //Finally add the pipe!
             pipes.add(pipeFactory.MakePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                     cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue()));
