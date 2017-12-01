@@ -443,6 +443,7 @@ public class GUI extends javax.swing.JFrame {
             tbxError.setText(err);
             updateTotal();
         } else {
+            err += "We cannot make a pipe to these specifications";
             tbxError.setForeground(Color.RED);
             tbxError.setText("Error:\n" + err);
         }
