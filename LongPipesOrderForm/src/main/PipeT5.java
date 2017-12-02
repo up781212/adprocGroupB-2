@@ -24,6 +24,7 @@ public class PipeT5 extends PipeT4 {
         return grade + 1;
     }
     
+    @Override
     public String getOuterReinforcement(){
         return "Yes";
     }
