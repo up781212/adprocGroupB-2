@@ -16,7 +16,6 @@ public class PipeT5 extends PipeT4 {
 
     public void calculateCostT5() {
         costTotal += baseCost * 0.17;//add Inner insulation
-        System.out.println("from T5 " + costTotal);
     }
     
         //override to return correct grade.
