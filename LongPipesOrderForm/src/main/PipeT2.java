@@ -24,7 +24,7 @@ public class PipeT2 extends Pipe {
     //override to return correct grade.
     @Override
      public int getGrade() {
-        return grade +1;
+        return grade;
     }
     
 }
