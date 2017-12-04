@@ -375,7 +375,7 @@ public class GUI extends javax.swing.JFrame {
             length = Double.parseDouble(tbxLength.getText());
             //check length
             if (length > maxLength || length <= 0) {
-                err += "Length is invalid. Must be between 0 and 6 centimeters.\n";
+                err += "Length is invalid. Must be between 0 and 6 meters.\n";
             } else {
 
             }
