@@ -100,17 +100,20 @@ public abstract class Pipe {
     //Work out area of cylinder
     private double cylinderVolume(double d) {
         //formula for area of a cylindar.
+
         return Math.PI * Math.pow((d / 2), 2) * length;
     }
 
     //Work out your cost
     protected double calculateBaseCost() {
-        double cost = pipeVolume() * costPerInch[grade];
+        double cost = pipeVolume() * costPerInch[grade-1];
         baseCost = cost;
-        costTotal = cost;
         if (chemicalResistance) {
             cost += baseCost * 0.14;//add chemical resistance
         }
+        costTotal = cost;
+                
+
         return cost;
     }
 
@@ -120,7 +123,7 @@ public abstract class Pipe {
     T1 in order to add all additional costs.
      */
     protected void calculateCost() {
-        costTotal = calculateBaseCost();
+        calculateBaseCost();
 
     }
 

@@ -16,6 +16,7 @@ public class PipeT4 extends PipeT3 {
 
     public void calculateCostT4() {
         costTotal += baseCost * 0.13;//add Inner insulation
+
     }
     @Override
     public String getInnerInsulation(){

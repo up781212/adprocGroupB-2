@@ -417,7 +417,7 @@ public class GUI extends javax.swing.JFrame {
 
             //add the new pipe to the UI so the user can view / delete pipes they do not want
             model.addElement("   "
-                    + Integer.toString(p.getGrade() + 1)
+                    + Integer.toString(p.getGrade() )
                     + "       "
                     + p.getColour()
                     + "   "
