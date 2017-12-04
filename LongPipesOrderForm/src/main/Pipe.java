@@ -34,9 +34,10 @@ public abstract class Pipe {
         innerDiameter = outerDiameter * 0.9;
         this.qty = qty;
         this.colours = colours;
-        
+
     }
 
+    //get / set methods
     public int getGrade() {
         return grade;
     }
@@ -88,6 +89,7 @@ public abstract class Pipe {
         return "No ";
     }
 
+    
     /*
     METHODS
      */
@@ -105,16 +107,13 @@ public abstract class Pipe {
     }
 
     //Work out your cost
-    protected double calculateBaseCost() {
-        double cost = pipeVolume() * costPerInch[grade-1];
+    protected void calculateBaseCost() {
+        double cost = pipeVolume() * costPerInch[grade - 1];
         baseCost = cost;
         if (chemicalResistance) {
             cost += baseCost * 0.14;//add chemical resistance
         }
         costTotal = cost;
-                
-
-        return cost;
     }
 
     /*Other additionalCosts can be calculated here.

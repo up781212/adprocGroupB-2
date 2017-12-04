@@ -6,18 +6,17 @@ package main;
  *
  */
 public class PipeT5 extends PipeT4 {
-
     public PipeT5(int grade, boolean chemicalResistance, double length, double outerDiameter, int qty) {
         super(grade, chemicalResistance, length, outerDiameter, qty);
         costPerInch = new double[]{0, 0, 0.75, 0.8, 0.95};//set cost per inch
         calculateCost();
     }
 
+    //override to ensure correct output
     @Override
     public void calculateCost() {
-        double cost = calculateBaseCost();
-        costTotal = cost;
-        costTotal += cost * 0.16; //add 1 colour
+        calculateBaseCost();
+        costTotal += baseCost * 0.16; //add 1 colour
         costTotal += baseCost * 0.17;//add Inner insulation
     }
 

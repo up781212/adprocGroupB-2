@@ -343,6 +343,7 @@ public class GUI extends javax.swing.JFrame {
 
     //pretend the order is submitted (beyond the scope of requirements)
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        //show dialog saying order has been submitted (actual code for this outside the scope of coursework)
         if (pipes.size() != 0) {
             JOptionPane.showMessageDialog(null, "Thank you, your order has been submitted!", "Submitted", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -352,6 +353,7 @@ public class GUI extends javax.swing.JFrame {
 
     //when the cancel button is pressed, close the application on prompt
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        //confirm dialog asking the user if they want to quit.
         int close = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (close == JOptionPane.YES_OPTION) {
             this.dispose();
@@ -371,6 +373,7 @@ public class GUI extends javax.swing.JFrame {
         //check textboxes are valid input (non-empty and parse to double)        
         try {
             length = Double.parseDouble(tbxLength.getText());
+            //check length
             if (length > maxLength || length <= 0) {
                 err += "Length is invalid. Must be between 0 and 6 centimeters.\n";
             } else {
@@ -381,6 +384,7 @@ public class GUI extends javax.swing.JFrame {
             err += "Length is not a number. \n";
         }
         try {
+            //check diameter
             diameter = Double.parseDouble(tbxDiameter.getText());
             if (diameter > maxDiameter || diameter <= 0) {
                 err += "Diameter is invalid. Must be between 0 and 4 inches.\n";
@@ -394,7 +398,7 @@ public class GUI extends javax.swing.JFrame {
         grade = (byte) cbxGrade.getSelectedIndex();
         grade++;
 
-        //test the pipe is okay.
+        //test the pipe is valid.
         String testPipe = pipeFactory.ValidatePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                 cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue());
 
@@ -405,7 +409,6 @@ public class GUI extends javax.swing.JFrame {
 
             Pipe p = pipes.get(pipes.size() - 1); //get last pipe added.
 
-            /*TIDY THIS UP*/
             //adjust the length of spacing to format correctly
             String spaceLen = "        ";
             if (p.getQty() >= 10 && p.getQty() < 100) {
@@ -417,7 +420,7 @@ public class GUI extends javax.swing.JFrame {
 
             //add the new pipe to the UI so the user can view / delete pipes they do not want
             model.addElement("   "
-                    + Integer.toString(p.getGrade() )
+                    + Integer.toString(p.getGrade())
                     + "       "
                     + p.getColour()
                     + "   "

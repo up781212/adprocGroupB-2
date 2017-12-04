@@ -9,14 +9,14 @@ package main;
 /*
 Welcome to the Pipe Factory!
 Here pipes are made based on the input criteria given
-(aka check the different features of the pipe, then create the right tier in the return)
+(check the different features of the pipe, then create the right tier in the return)
 
 Please input the data from user input here for validation and to determine which pipe is needed,
-DO NOT REFERENCE PIPE OR ITS CHILDREN DIRECTLY WHEN CREATING PIPES!!!
+DO NOT REFERENCE PIPE OR ITS CHILDREN DIRECTLY FROM OUTSIDE PIPEFACTORY WHEN CREATING PIPES!!!
  */
 public class PipeFactory {
 
-    //improve this later, checks pipe type and then creates an object of that type
+    //makes the pipes. Ensure pipes have been tested by TestPipe before doing so.
     public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, int qty) {
         length = convertToInches(length);//convert length to inches, all values are the same type within pipe classes.
 

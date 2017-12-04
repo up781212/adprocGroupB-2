@@ -14,11 +14,11 @@ public class PipeT2 extends Pipe {
         calculateCost();
     }
 
+    //override the cost calculation to add a colour
     @Override
     public void calculateCost() {
-        double cost = calculateBaseCost();
-        costTotal = cost;
-        costTotal += cost * 0.12; //add 1 colour
+        calculateBaseCost();
+        costTotal += baseCost * 0.12; //add 1 colour
     }
     
     //override to return correct grade.

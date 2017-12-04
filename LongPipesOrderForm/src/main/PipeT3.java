@@ -13,6 +13,7 @@ public class PipeT3 extends Pipe {
         calculateCost();
     }
 
+    //Add two colours to the base cost
     @Override
     public void calculateCost() {
         calculateBaseCost();
