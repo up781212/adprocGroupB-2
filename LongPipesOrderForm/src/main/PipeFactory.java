@@ -73,12 +73,12 @@ public class PipeFactory {
             if (validationCriteria[x][2] == convertBool(innerInsulation)) {
                 matchCount++;
             } else {
-                currentFailed[1] = "\nToggle inner insulation.";
+                currentFailed[1] = "\nChange inner insulation to " + boolOnOff(!innerInsulation);
             }
             if (validationCriteria[x][3] == convertBool(outerReinforcement)) {
                 matchCount++;
             } else {
-                currentFailed[2] = "\nToggle outer reinforcement";
+                currentFailed[2] = "\nChange outer reinforcement to " + boolOnOff(!outerReinforcement);
             }
             if (validationCriteria[x][4] == colour) {
                 matchCount++;
@@ -114,9 +114,16 @@ public class PipeFactory {
     }
 
     private int convertBool(boolean b) {
-        if (b == true) {
+        if (b) {
             return 1;
         }
         return 0;
+    }
+
+    private String boolOnOff(boolean b) {
+        if (b) {
+            return "checked";
+        }
+        return "unchecked";
     }
 }
