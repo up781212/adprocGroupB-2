@@ -46,38 +46,14 @@ public class PipeFactory {
 
         //validation follows pattern [pipetype 1 - 5]
         //[testCriteria] min grade, max grade, inner insulation, outer reinforcement, colour.
-        int validationCriteria[][] = new int[5][5];
-        String ret = "Sorry, we have encoutered a problem.";
-        //type 1
-        validationCriteria[0][0] = 1;
-        validationCriteria[0][1] = 3;
-        validationCriteria[0][2] = 0;
-        validationCriteria[0][3] = 0;
-        validationCriteria[0][4] = 0;
-        //type2
-        validationCriteria[1][0] = 2;
-        validationCriteria[1][1] = 4;
-        validationCriteria[1][2] = 0;
-        validationCriteria[1][3] = 0;
-        validationCriteria[1][4] = 1;
-        //type3
-        validationCriteria[2][0] = 2;
-        validationCriteria[2][1] = 4;
-        validationCriteria[2][2] = 0;
-        validationCriteria[2][3] = 0;
-        validationCriteria[2][4] = 2;
-        //type4
-        validationCriteria[3][0] = 2;
-        validationCriteria[3][1] = 4;
-        validationCriteria[3][2] = 1;
-        validationCriteria[3][3] = 0;
-        validationCriteria[3][4] = 2;
-        //type5
-        validationCriteria[4][0] = 3;
-        validationCriteria[4][1] = 5;
-        validationCriteria[4][2] = 1;
-        validationCriteria[4][3] = 1;
-        validationCriteria[4][4] = 2;
+        int validationCriteria[][] = {
+            {1, 3, 0, 0, 0},
+            {2, 4, 0, 0, 1},
+            {2, 4, 0, 0, 2},
+            {2, 4, 1, 0, 2},
+            {3, 5, 1, 1, 2}};
+
+        String ret;
 
         int maxMatch = 0; //count the number of criteria met for each class.
         int maxMatchCounter = 0; //store the type that got the maxMatch
@@ -91,26 +67,26 @@ public class PipeFactory {
                 matchCount++;
                 currentFailed[0] = "";
             } else {
-                currentFailed[0] = "\nplease set grade between " + validationCriteria[x][0] + " and " + validationCriteria[x][1];
+                currentFailed[0] = "\nPlease set grade between " + validationCriteria[x][0] + " and " + validationCriteria[x][1];
             }
             if (validationCriteria[x][2] == convertBool(innerInsulation)) {
                 matchCount++;
                 currentFailed[1] = "";
 
             } else {
-                currentFailed[1] = "\ntoggle inner insulation.";
+                currentFailed[1] = "\nToggle inner insulation.";
             }
             if (validationCriteria[x][3] == convertBool(outerReinforcement)) {
                 matchCount++;
                 currentFailed[2] = "";
             } else {
-                currentFailed[2] = "\ntoggle outer reinforcement";
+                currentFailed[2] = "\nToggle outer reinforcement";
             }
             if (validationCriteria[x][4] == colour) {
                 matchCount++;
                 currentFailed[3] = "";
             } else {
-                currentFailed[3] = "\nset colour to " + validationCriteria[x][4];
+                currentFailed[3] = "\nSet colour to " + validationCriteria[x][4];
             }
             if (matchCount > maxMatch) {
                 maxMatch = matchCount;
