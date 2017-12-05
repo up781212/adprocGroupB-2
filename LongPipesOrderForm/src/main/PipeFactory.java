@@ -128,7 +128,6 @@ public class PipeFactory {
         } else {
             ret = "Type " + (maxMatchCounter + 1);
         }
-        System.out.println(maxMatch);
         return ret;
     }
 
