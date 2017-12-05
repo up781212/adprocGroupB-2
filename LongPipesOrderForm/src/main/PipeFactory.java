@@ -47,11 +47,12 @@ public class PipeFactory {
         //validation follows pattern [pipetype 1 - 5]
         //[testCriteria] min grade, max grade, inner insulation, outer reinforcement, colour.
         int validationCriteria[][] = {
-            {1, 3, 0, 0, 0},
-            {2, 4, 0, 0, 1},
-            {2, 4, 0, 0, 2},
-            {2, 4, 1, 0, 2},
-            {3, 5, 1, 1, 2}};
+            {1, 3, 0, 0, 0}, //type 1
+            {2, 4, 0, 0, 1}, //type 2
+            {2, 4, 0, 0, 2}, //type 3
+            {2, 4, 1, 0, 2}, //type 4
+            {3, 5, 1, 1, 2}  //type 5
+        };
 
         String ret;
 
@@ -62,32 +63,29 @@ public class PipeFactory {
 
         for (int x = 0; x < 5; x++) {
             int matchCount = 0;
-            String currentFailed[] = new String[4]; //store which item failed from that failure
+            String currentFailed[] = {"", "", "", ""}; //store which item failed from that failure
+
             if (validationCriteria[x][0] <= grade && validationCriteria[x][1] >= grade) {
                 matchCount++;
-                currentFailed[0] = "";
             } else {
                 currentFailed[0] = "\nPlease set grade between " + validationCriteria[x][0] + " and " + validationCriteria[x][1];
             }
             if (validationCriteria[x][2] == convertBool(innerInsulation)) {
                 matchCount++;
-                currentFailed[1] = "";
-
             } else {
                 currentFailed[1] = "\nToggle inner insulation.";
             }
             if (validationCriteria[x][3] == convertBool(outerReinforcement)) {
                 matchCount++;
-                currentFailed[2] = "";
             } else {
                 currentFailed[2] = "\nToggle outer reinforcement";
             }
             if (validationCriteria[x][4] == colour) {
                 matchCount++;
-                currentFailed[3] = "";
             } else {
                 currentFailed[3] = "\nSet colour to " + validationCriteria[x][4];
             }
+
             if (matchCount > maxMatch) {
                 maxMatch = matchCount;
                 maxMatchCounter = x;
