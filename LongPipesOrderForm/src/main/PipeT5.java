@@ -16,8 +16,9 @@ public class PipeT5 extends PipeT4 {
     @Override
     public void calculateCost() {
         calculateBaseCost();
-        costTotal += baseCost * 0.16; //add 1 colour
-        costTotal += baseCost * 0.17;//add Inner insulation
+        costTotal += baseCost * 0.16; //add 2 colours
+        costTotal += baseCost * 0.17;//add outer reinforcement
+        costTotal += baseCost * 0.13; //add inner insulation
     }
 
     //override to return correct grade.
