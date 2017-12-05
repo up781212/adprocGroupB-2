@@ -20,7 +20,7 @@ public class PipeFactory {
     public Pipe MakePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, int qty) {
         length = convertToInches(length);//convert length to inches, all values are the same type within pipe classes.
 
-        String type = ValidatePipe(grade, chemicalResistance, length, outerDiameter, innerInsulation, outerReinforcement, colour, qty);
+        String type = ValidatePipe(grade, innerInsulation, outerReinforcement, colour);
         switch (type) {
             case "Type 1":
                 PipeT1 pip1 = new PipeT1(grade, chemicalResistance, length, outerDiameter, qty);
@@ -42,30 +42,94 @@ public class PipeFactory {
     }
 
     //checks if a pipe is valid and returns a String of the pipe's type. Error is given in the case of a pipe being invalid.
-    public String ValidatePipe(int grade, boolean chemicalResistance, double length, double outerDiameter, boolean innerInsulation, boolean outerReinforcement, int colour, int qty) {
-        if (grade > 0 && colour >= 0 && colour <= 2) {
-            if (colour == 2 && grade >= 2) {
-                if (innerInsulation) {
-                    if (outerReinforcement && grade >= 3) {
-                        return "Type 5"; //type 5
-                    } else if (!outerReinforcement){
-                        return "Type 4"; //type 4
-                    }
-                }
-                if (!innerInsulation && !outerReinforcement) {
-                    return "Type 3"; //type 3
-                }
+    public String ValidatePipe(int grade, boolean innerInsulation, boolean outerReinforcement, int colour) {
+
+        //validation follows pattern [pipetype 1 - 5]
+        //[testCriteria] min grade, max grade, inner insulation, outer reinforcement, colour.
+        int validationCriteria[][] = new int[5][5];
+        String ret = "Sorry, we have encoutered a problem.";
+        //type 1
+        validationCriteria[0][0] = 1;
+        validationCriteria[0][1] = 3;
+        validationCriteria[0][2] = 0;
+        validationCriteria[0][3] = 0;
+        validationCriteria[0][4] = 0;
+        //type2
+        validationCriteria[1][0] = 2;
+        validationCriteria[1][1] = 4;
+        validationCriteria[1][2] = 0;
+        validationCriteria[1][3] = 0;
+        validationCriteria[1][4] = 1;
+        //type3
+        validationCriteria[2][0] = 2;
+        validationCriteria[2][1] = 4;
+        validationCriteria[2][2] = 0;
+        validationCriteria[2][3] = 0;
+        validationCriteria[2][4] = 2;
+        //type4
+        validationCriteria[3][0] = 2;
+        validationCriteria[3][1] = 4;
+        validationCriteria[3][2] = 1;
+        validationCriteria[3][3] = 0;
+        validationCriteria[3][4] = 2;
+        //type5
+        validationCriteria[4][0] = 3;
+        validationCriteria[4][1] = 5;
+        validationCriteria[4][2] = 1;
+        validationCriteria[4][3] = 1;
+        validationCriteria[4][4] = 2;
+
+        int maxMatch = 0; //count the number of criteria met for each class.
+        int maxMatchCounter = 0; //store the type that got the maxMatch
+        //grade,innerinsulation, outerreinforcement, colour
+        String failedItems[] = {"", "", "", ""};//use to return fails to change in case of no match
+
+        for (int x = 0; x < 5; x++) {
+            int matchCount = 0;
+            String currentFailed[] = new String[4]; //store which item failed from that failure
+            if (validationCriteria[x][0] <= grade && validationCriteria[x][1] >= grade) {
+                matchCount++;
+                currentFailed[0] = "";
+            } else {
+                currentFailed[0] = "\nplease set grade between " + validationCriteria[x][0] + " and " + validationCriteria[x][1];
             }
-            if (!innerInsulation && !outerReinforcement) {
-                if (colour == 1 && grade >= 2 && grade <= 4) {
-                    return "Type 2"; //type 2
-                }
-                if (colour == 0 && grade <= 3) {
-                    return "Type 1"; //type 1
-                }
+            if (validationCriteria[x][2] == convertBool(innerInsulation)) {
+                matchCount++;
+                currentFailed[1] = "";
+
+            } else {
+                currentFailed[1] = "\ntoggle inner insulation.";
+            }
+            if (validationCriteria[x][3] == convertBool(outerReinforcement)) {
+                matchCount++;
+                currentFailed[2] = "";
+            } else {
+                currentFailed[2] = "\ntoggle outer reinforcement";
+            }
+            if (validationCriteria[x][4] == colour) {
+                matchCount++;
+                currentFailed[3] = "";
+            } else {
+                currentFailed[3] = "\nset colour to " + validationCriteria[x][4];
+            }
+            if (matchCount > maxMatch) {
+                maxMatch = matchCount;
+                maxMatchCounter = x;
+                failedItems = currentFailed;
             }
         }
-        return "Error, this type of pipe is not available."; //grade invalid. Either invalid input or invalid type
+
+        if (maxMatch < 4) {
+            //add suggested edits for the user here
+            ret = "Sorry, we are unable to fulfill this order. \nWe can create a pipe with the changes specified below.";
+            for (int x = 0; x < 4; x++) {
+                ret += failedItems[x];
+            }
+        } else {
+            ret = "Type " + (maxMatchCounter + 1);
+        }
+        System.out.println(maxMatch);
+        return ret;
     }
 
     protected double convertToInches(double meter) {
@@ -74,5 +138,12 @@ public class PipeFactory {
 
     protected double convertToMeters(double inch) {
         return inch * 0.0254;
+    }
+
+    private int convertBool(boolean b) {
+        if (b == true) {
+            return 1;
+        }
+        return 0;
     }
 }

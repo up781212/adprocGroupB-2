@@ -399,10 +399,9 @@ public class GUI extends javax.swing.JFrame {
         grade++;
 
         //test the pipe is valid.
-        String testPipe = pipeFactory.ValidatePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
-                cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue());
+        String testPipe = pipeFactory.ValidatePipe(grade, cbxInsulation.isSelected(), cbxReinforcement.isSelected(), cbxColour.getSelectedIndex());
 
-        if (testPipe.charAt(0) != 'E' && err == "") {
+        if (testPipe.charAt(0) != 'S' && err == "") {
             //Finally add the pipe!
             pipes.add(pipeFactory.MakePipe(grade, cbxChemicalResistance.isSelected(), length, diameter, cbxInsulation.isSelected(),
                     cbxReinforcement.isSelected(), cbxColour.getSelectedIndex(), (int) spnQty.getValue()));
@@ -446,7 +445,7 @@ public class GUI extends javax.swing.JFrame {
             tbxError.setText(err);
             updateTotal();
         } else {
-            err += "We cannot make a pipe to these specifications";
+            err += testPipe;
             tbxError.setForeground(Color.RED);
             tbxError.setText("Error:\n" + err);
         }
