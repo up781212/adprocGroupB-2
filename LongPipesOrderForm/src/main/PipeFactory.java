@@ -49,8 +49,8 @@ public class PipeFactory {
         int validationCriteria[][] = {
             {1, 3, 0, 0, 0}, //type 1
             {2, 4, 0, 0, 1}, //type 2
-            {2, 4, 0, 0, 2}, //type 3
-            {2, 4, 1, 0, 2}, //type 4
+            {2, 5, 0, 0, 2}, //type 3
+            {2, 5, 1, 0, 2}, //type 4
             {3, 5, 1, 1, 2}  //type 5
         };
 
