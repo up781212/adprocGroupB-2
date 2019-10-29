@@ -22,4 +22,16 @@ public class PipeT4 extends PipeT3 {
     public String getInnerInsulation(){
         return "Yes";
     }
+    
+    public void calculateCost() {
+        double cost = calculateBaseCost();
+        double costIncrease;
+        costIncrease = cost * 0.16; //add 2 colours
+        costIncrease += cost * 0.13; //adds Inner Insulation
+        if (getChemicalResistance()) {
+            costIncrease += cost * 0.14;
+        }
+        costTotal = cost + costIncrease;
+        //Not sure if this works better?
+    }
 }
