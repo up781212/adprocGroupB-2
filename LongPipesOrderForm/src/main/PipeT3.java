@@ -25,4 +25,11 @@ public class PipeT3 extends Pipe {
     public int getGrade() {
         return grade;
     }
+    public void calculateCost() {
+        double cost = calculateBaseCost();
+        costTotal *= 1.16; //add 2 colours
+        if (getChemicalResistance()) {
+            costTotal = cost * 1.14;
+        }
+    }
 }
